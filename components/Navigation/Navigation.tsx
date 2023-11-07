@@ -20,8 +20,8 @@ export default function Navigation({ navigation }: NavigationProps) {
       text: "Search",
     },
     {
-      image: require("../../assets/favourite.png"),
-      text: "Favourites",
+      image: require("../../assets/shopping-basket.png"),
+      text: "Basket",
     },
     {
       image: require("../../assets/user.png"),

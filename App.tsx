@@ -6,21 +6,29 @@ import Catalog from './screens/Catalog';
 import Search from './screens/Search';
 import Favourites from './screens/Favourites';
 import Profile from './screens/Profile';
-
+import { Provider } from 'react-redux'
+import { store } from './store';
+import Basket from './screens/Basket';
 
 const Stack = createNativeStackNavigator();
+
+
 
 export default function App() {
 
   return (
-    <NavigationContainer >
+    <Provider store={store}>
+       <NavigationContainer >
       <Stack.Navigator initialRouteName='Catalog' screenOptions={{ animation: 'none' }}>
       <Stack.Screen name="Catalog" component={Catalog} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Favourites" component={Favourites} />
+      <Stack.Screen name="Basket" component={Basket} />
       <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
+   
   );
 }
 

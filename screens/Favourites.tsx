@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import Navigation from '../components/Navigation/Navigation'
 
-
 interface RouterProps {
     navigation: NavigationProp<any, any>
   }
@@ -19,6 +18,6 @@ const styles = StyleSheet.create({
     container: {
       height: "100%",
       padding: 40,
-      backgroundColor:"black"
+      backgroundColor:"white"
     }
   })
