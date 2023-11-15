@@ -76,7 +76,6 @@ export default function Basket({ navigation }: RouterProps) {
         keyExtractor={(item) => item.id.toString()}
         numColumns={1}
       />
-      {/* <Navigation navigation={navigation} /> */}
       <View style={styles.checkoutContainer}>
         <View style={styles.voucherAndPrice}>
           <View style={styles.voucherInputContainer}>
@@ -94,10 +93,8 @@ export default function Basket({ navigation }: RouterProps) {
         <TouchableOpacity style={styles.checkoutButton}>
           <Text style={styles.checkoutText}>Checkout</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <Text>Checkout with paypal </Text>
-        </TouchableOpacity> */}
       </View>
+      <Navigation navigation={navigation} />
     </View>
   );
 }
@@ -112,6 +109,7 @@ const styles = StyleSheet.create({
   },
   image: {
     marginRight: 10,
+    width: 100,
   },
   row: {
     flex: 1,
@@ -158,6 +156,8 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 20,
     borderRadius: 10,
+    marginBottom: 50,
+    marginTop: 15,
   },
   voucherAndPrice: {
     display: "flex",
