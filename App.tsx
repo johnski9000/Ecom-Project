@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import Basket from "./screens/Basket";
 import Pdp from "./screens/Pdp";
+import { useEffect, useState } from "react";
 
 const Stack = createNativeStackNavigator();
 

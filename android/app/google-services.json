@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374279466752",
+    "project_id": "ic-ecom-store",
+    "storage_bucket": "ic-ecom-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374279466752:android:805ac1829c8dd4da010de5",
+        "android_client_info": {
+          "package_name": "com.ecomstore.ic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZOtV1A8M13FG0awkZLVcXlgFXg2VlEms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

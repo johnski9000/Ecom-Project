@@ -23,7 +23,6 @@ export default function Catalog({ navigation }: RouterProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<any>(true);
   const [error, setError] = useState<any>();
-  const [endIndex, setEndIndex] = useState<number>(10);
 
   const basket = useAppSelector((state) => state.basket);
   console.log(basket);

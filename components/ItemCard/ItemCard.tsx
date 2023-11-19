@@ -34,11 +34,14 @@ export default function ItemCard({ product }: ItemCardProps) {
       <TouchableOpacity
         onPress={() => navigation.navigate("PDP", { product: product })}
       >
-        <Image
-          source={{ uri: product.image }}
-          style={styles.image} // You can adjust the size as needed
-          resizeMode="contain" // or 'cover', 'stretch', etc.
-        />
+        <View>
+          <Image
+            source={{ uri: product.image }}
+            style={styles.image} // You can adjust the size as needed
+            resizeMode="contain" // or 'cover', 'stretch', etc.
+          />
+        </View>
+
         <Text style={styles.title}>{truncateTitle(product.title)}</Text>
         <Text style={styles.text}>{product.price}£</Text>
       </TouchableOpacity>
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 100,
-    width: "100%",
+    width: 100,
   },
   title: {
     fontWeight: "bold",
