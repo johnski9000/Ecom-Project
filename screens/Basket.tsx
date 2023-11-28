@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
@@ -9,12 +10,7 @@ import {
 } from "react-native";
 import React, { Component, useCallback } from "react";
 import Navigation from "../components/Navigation/Navigation";
-import {
-  useAddItem,
-  useAppSelector,
-  useRemoveItem,
-  useTruncateTitle,
-} from "../hooks";
+import { useAddItem, useAppSelector, useRemoveItem } from "../hooks";
 
 interface RouterProps {
   navigation: {};
@@ -26,16 +22,19 @@ const truncateTitle = (title: any) => {
   }
   return title;
 };
+export function calculateTotal(basket: any) {
+  return basket
+    .reduce((accumulator, currentItem) => {
+      return accumulator + currentItem.price * currentItem.amount;
+    }, 0)
+    .toFixed(2);
+}
 export default function Basket({ navigation }: RouterProps) {
   const addItem = useAddItem();
   const removeItem = useRemoveItem();
-  const { basket } = useAppSelector((state) => state.basket);
-  function calculateTotal() {
-    return basket
-      .reduce((accumulator, currentItem) => {
-        return accumulator + currentItem.price * currentItem.amount;
-      }, 0)
-      .toFixed(2);
+  const basket = useAppSelector((state) => state.basket);
+  function checkout() {
+    navigation.navigate("Paypal");
   }
 
   const renderItem = useCallback(
@@ -68,36 +67,30 @@ export default function Basket({ navigation }: RouterProps) {
 
   return (
     <View style={styles.container}>
-      <Text>Basket</Text>
-      <FlatList
-        style={styles.basketList}
-        data={basket}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={1}
-      />
-      {/* <Navigation navigation={navigation} /> */}
-      <View style={styles.checkoutContainer}>
-        <View style={styles.voucherAndPrice}>
-          <View style={styles.voucherInputContainer}>
-            <TextInput
-              style={styles.voucherInput}
-              placeholder="Voucher"
-              keyboardType="numeric"
-            ></TextInput>
-          </View>
-
+      <KeyboardAvoidingView style={{ height: "100%" }}>
+        <Text>Basket</Text>
+        <FlatList
+          style={styles.basketList}
+          data={basket}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={1}
+        />
+        <View style={styles.checkoutContainer}>
           <View style={styles.totalPriceContainer}>
-            <Text style={styles.totalPrice}>TOTAL: ${calculateTotal()}</Text>
+            <Text style={styles.totalPrice}>
+              TOTAL: ${calculateTotal(basket)}
+            </Text>
           </View>
+          <TouchableOpacity
+            style={styles.checkoutButton}
+            onPress={() => checkout()}
+          >
+            <Text style={styles.checkoutText}>Checkout</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutText}>Checkout</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <Text>Checkout with paypal </Text>
-        </TouchableOpacity> */}
-      </View>
+      </KeyboardAvoidingView>
+      <Navigation navigation={navigation} />
     </View>
   );
 }
@@ -112,10 +105,11 @@ const styles = StyleSheet.create({
   },
   image: {
     marginRight: 10,
+    width: 100,
   },
   row: {
     flex: 1,
-    justifyContent: "space-around", // Adjust this to change the spacing between items
+    justifyContent: "space-around",
   },
   price: {
     color: "#ff4201",
@@ -129,6 +123,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 20,
     marginTop: 10,
+    fontWeight: "bold",
   },
   item: {
     backgroundColor: "#fafafa",
@@ -158,34 +153,21 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 20,
     borderRadius: 10,
-  },
-  voucherAndPrice: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 10,
-  },
-  voucherInputContainer: {
-    borderColor: "white",
-    borderWidth: 1,
-    flex: 1,
-    borderRadius: 10,
-  },
-  voucherInput: {
-    color: "white",
-    padding: 15,
-    paddingTop: 8,
-    paddingBottom: 8,
+    marginBottom: 50,
+    marginTop: 15,
   },
   totalPriceContainer: {
-    flex: 1,
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderRadius: 10,
     backgroundColor: "#ff4100",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
   },
   totalPrice: {
     color: "white",
+    fontWeight: "bold",
   },
   checkoutButton: {
     backgroundColor: "#00de81",

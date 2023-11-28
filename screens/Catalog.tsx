@@ -5,9 +5,8 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation/Navigation";
-import { useAppSelector, useGetItems } from "../hooks";
 import ItemCard, { Product } from "../components/ItemCard/ItemCard";
 
 interface RouterProps {
@@ -23,20 +22,7 @@ export default function Catalog({ navigation }: RouterProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<any>(true);
   const [error, setError] = useState<any>();
-  const [endIndex, setEndIndex] = useState<number>(10);
 
-  const basket = useAppSelector((state) => state.basket);
-  console.log(basket);
-
-  const dummyItem = {
-    id: 1,
-    title: "Sample Product",
-    price: "19.99",
-    category: "Electronics",
-    description:
-      "This is a sample description of a product, detailing its features and benefits.",
-    image: "https://via.placeholder.com/150",
-  };
   const ListEndLoader = () => {
     if (isLoading) {
       // Show loader at the end of list when fetching next page data.
