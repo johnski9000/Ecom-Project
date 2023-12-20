@@ -7,17 +7,19 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import OrderHistory from "../OrderHistory/OrderHistory";
+import { clearBasket } from "../../Redux/reducers/basketReducer";
 
 export default function UserProfile() {
   const [edit, setEdit] = useState(false);
   const [tab, setTab] = useState("Profile");
   const user = useSelector((state) => state.user);
   console.log("user", user);
-
+  const dispatch = useDispatch();
   const imageUrl = user?.user?.photoURL || undefined;
   function editPage() {
     setEdit(!edit);
@@ -128,7 +130,10 @@ export default function UserProfile() {
               <Text style={styles.buttonText}>Reset Password</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => auth().signOut()}
+              onPress={() => {
+                dispatch(clearBasket());
+                auth().signOut();
+              }}
               style={styles.logOutButton}
             >
               <Text style={styles.buttonText}>Logout</Text>
@@ -136,9 +141,7 @@ export default function UserProfile() {
           </View>
         </View>
       ) : (
-        <View>
-          <Text>order his</Text>
-        </View>
+        <OrderHistory />
       )}
     </View>
   );

@@ -8,27 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { Component, useCallback } from "react";
+import React, { useCallback } from "react";
 import Navigation from "../components/Navigation/Navigation";
 import { useAddItem, useAppSelector, useRemoveItem } from "../hooks";
+import { BasketState, RouterProps } from "../types";
+import { calculateTotal, truncateTitle } from "../functions";
 
-interface RouterProps {
-  navigation: {};
-}
-const truncateTitle = (title: any) => {
-  const titleWords = title.split(" ");
-  if (titleWords.length > 3) {
-    return titleWords.slice(0, 2).join(" ") + "...";
-  }
-  return title;
-};
-export function calculateTotal(basket: any) {
-  return basket
-    .reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.price * currentItem.amount;
-    }, 0)
-    .toFixed(2);
-}
 export default function Basket({ navigation }: RouterProps) {
   const addItem = useAddItem();
   const removeItem = useRemoveItem();
@@ -36,7 +21,6 @@ export default function Basket({ navigation }: RouterProps) {
   function checkout() {
     navigation.navigate("Paypal");
   }
-
   const renderItem = useCallback(
     ({ item }: any) => (
       <View style={styles.item}>
@@ -68,7 +52,6 @@ export default function Basket({ navigation }: RouterProps) {
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView style={{ height: "100%" }}>
-        <Text>Basket</Text>
         <FlatList
           style={styles.basketList}
           data={basket}
@@ -86,7 +69,7 @@ export default function Basket({ navigation }: RouterProps) {
             style={styles.checkoutButton}
             onPress={() => checkout()}
           >
-            <Text style={styles.checkoutText}>Checkout</Text>
+            <Text style={styles.checkoutText}>Checkout with PAYPAL</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -170,7 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   checkoutButton: {
-    backgroundColor: "#00de81",
+    backgroundColor: "#00457C",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

@@ -1,8 +1,8 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
-import { Product } from "./components/ItemCard/ItemCard";
-import { decrement, increment } from "./reducers/basketReducer";
+import type { RootState, AppDispatch } from "./Redux/store";
+import { decrement, increment } from "./Redux/reducers/basketReducer";
 import { useCallback } from "react";
+import { Product } from "./types";
 
 
 export async function useGetItems() {
@@ -45,13 +45,7 @@ export function useRemoveItem() {
 
   return removeItem;
 }
-export function useTruncateTitle (title:any) {
-    const titleWords = title.split(' ');
-    if (titleWords.length > 3) {
-      return titleWords.slice(0, 3).join(' ') + '...';
-    }
-    return title;
-  };
+
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 type DispatchFunc = () => AppDispatch;

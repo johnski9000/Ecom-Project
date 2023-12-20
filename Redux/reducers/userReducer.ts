@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
+import { User } from "../../types";
 
 // Define the user type
-type User = {
-  name: string;
-  email: string;
-  photo: string;
-};
 
 // The state will either be a User object or null (if no user is logged in)
 type UserState = User | null;

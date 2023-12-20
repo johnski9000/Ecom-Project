@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   navImageActive: {
     width: 25,
     height: 25,
-    tintColor: "rgb(253, 208, 47)",
+    // tintColor: "rgb(253, 208, 47)",
+    tintColor: "#ff4201",
   },
 });

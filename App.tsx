@@ -4,12 +4,12 @@ import Catalog from "./screens/Catalog";
 import Search from "./screens/Search";
 import Profile from "./screens/Profile";
 import { Provider, useDispatch } from "react-redux";
-import { store } from "./store";
+import { store } from "./Redux/store";
 import Basket from "./screens/Basket";
 import Pdp from "./screens/Pdp";
 import React, { useEffect } from "react";
 import auth from "@react-native-firebase/auth";
-import { clearUser, setUser } from "./reducers/userReducer";
+import { clearUser, setUser } from "./Redux/reducers/userReducer";
 import Paypal from "./screens/Paypal";
 
 const Stack = createNativeStackNavigator();

@@ -1,25 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
+import { Product } from "../../types";
 
-// Define a type for the slice state
-export interface BasketItem {
-  id: number;
-  title: string;
-  price: string;
-  category: string;
-  description: string;
-  image: string;
-  amount?: number;
-}
-
-const initialState: BasketItem[] = [];
+const initialState: Product[] = [];
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    increment: (state, action: PayloadAction<BasketItem>) => {
+    increment: (state, action: PayloadAction<Product>) => {
       const index = state.findIndex(
-        (item: BasketItem) => item.id === action.payload.id
+        (item: Product) => item.id === action.payload.id
       );
       if (index !== -1) {
         if (state[index].amount) {
@@ -32,9 +22,9 @@ export const basketSlice = createSlice({
         state.push(newItem);
       }
     },
-    decrement: (state, action: PayloadAction<BasketItem>) => {
+    decrement: (state, action: PayloadAction<Product>) => {
       const index = state.findIndex(
-        (item: BasketItem) => item.id === action.payload.id
+        (item: Product) => item.id === action.payload.id
       );
       if (index !== -1 && state[index].amount === 1) {
         state.splice(index, 1);
@@ -44,7 +34,7 @@ export const basketSlice = createSlice({
     },
     incrementByAmount: (state, action: PayloadAction<number>) => {},
     clearBasket: (state) => {
-      return (state = []);
+      state.splice(0, state.length);
     },
   },
 });

@@ -6,10 +6,8 @@ import LoginComponent from "../components/Login/LoginComponent";
 import SignUpComponent from "../components/SignUp/SignUpComponent";
 import { useAppSelector } from "../hooks";
 import UserProfile from "../components/UserProfile/UserProfile";
+import { RouterProps } from "../types";
 
-interface RouterProps {
-  navigation: NavigationProp<any, any>;
-}
 function RegisterLogin() {
   const [screen, setScreen] = useState("Login");
   function changeScreen() {
